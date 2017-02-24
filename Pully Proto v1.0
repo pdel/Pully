@@ -8,7 +8,7 @@ Pully
 
 # v0.01
 from bs4 import BeautifulSoup
-import urllib
+import urllib2
 
 admins = {'Paul':'pass!'}
 
@@ -17,7 +17,7 @@ def Pully():
     print(Welcome)
     linktoenter = input('Where do you want to Pull from today?: ')
     url = linktoenter
-    html = urllib.request.urlopen(url).read()
+    html = urllib2.urlopen(url).read()
     soup = BeautifulSoup(html, "lxml")
     #headlines = {'class':'title',
                  #'class':'headline-list__link'}
