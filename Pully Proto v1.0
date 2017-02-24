@@ -1,0 +1,68 @@
+Pully
+
+1.) v0.01 Setup search functionality
+2.) v0.02 Have search return all links from front page unless other criteria is specified (author, date)
+3.) v0.03 When specific link is returned, pull all text from link between <p></p>
+4.) v0.1 Store Data in dataframe, send to SQL DB
+'''
+
+# v0.01
+from bs4 import BeautifulSoup
+import urllib
+
+admins = {'Paul':'pass!'}
+
+def Pully():
+    Welcome = ('Welcome to Pully')
+    print(Welcome)
+    linktoenter = input('Where do you want to Pull from today?: ')
+    url = linktoenter
+    html = urllib.request.urlopen(url).read()
+    soup = BeautifulSoup(html, "lxml")
+    #headlines = {'class':'title',
+                 #'class':'headline-list__link'}
+
+    if linktoenter in url:
+        print('Retrieving your links...')
+        links = {}
+        n = 0
+        link_title=soup.findAll('a',{'class':'title'})
+        n += 1
+        links[n] = link_title
+        for eachtitle in link_title:
+            print(eachtitle.string +" (pulled from) "+eachtitle['href'])
+        
+        else:
+            print('Please enter another URL...')
+
+# Main       
+def main():
+    print('''
+    Pully v0.01
+    
+    [1] Pully
+    [2] Exit
+    ''')
+    
+    action = input('Choose an option: ')
+    
+    if action == '1':
+        Pully()
+    elif action == '2':
+        exit()
+    else:
+        print('select a number') 
+
+# Login
+login = input('Username: ')
+passw = input('Password: ')
+
+if login in admins:
+    if admins[login] == passw:
+        print('Welcome', login)
+        while True: 
+            main()
+    else: 
+        print('Invalid Password')
+else:
+    print('Invalid Username')
