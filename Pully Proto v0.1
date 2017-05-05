@@ -1,29 +1,33 @@
+'''
 Pully
 
-1.) v0.01 Setup search functionality
-2.) v0.02 Have search return all links from front page unless other criteria is specified (author, date)
-3.) v0.03 When specific link is returned, pull all text from link between <p></p>
-4.) v0.1 Store Data in dataframe, send to SQL DB
+1.) v0.1 Setup search functionality
+2.) v0.2 Have search return all links from front page unless other criteria is specified (author, date)
+3.) v0.3 When specific link is returned, pull all text from link between <p></p>
+4.) v0.4 Store Data in dataframe, send to SQL DB
+5.) v1.0 Add url/link tracking in order to pull user behavior data
 '''
 
 # v0.01
 from bs4 import BeautifulSoup
-import urllib2
+import urllib
+import time
 
 admins = {'Paul':'pass!'}
+now = time.strftime("%c")
 
 def Pully():
     Welcome = ('Welcome to Pully')
     print(Welcome)
-    linktoenter = input('Where do you want to Pull from today?: ')
+    linktoenter = input('Where do you want to pull from today?: ')
     url = linktoenter
-    html = urllib2.urlopen(url).read()
+    html = urllib.request.urlopen(url).read()
     soup = BeautifulSoup(html, "lxml")
     #headlines = {'class':'title',
                  #'class':'headline-list__link'}
 
     if linktoenter in url:
-        print('Retrieving your links...')
+        print('Here are your top stories for ' + (time.strftime("%A "  +  "%B "  +  "%d")))
         links = {}
         n = 0
         link_title=soup.findAll('a',{'class':'title'})
@@ -33,6 +37,7 @@ def Pully():
             print(eachtitle.string +" (pulled from) "+eachtitle['href'])
         
         else:
+            print('Whoops! Nothing seems to be here ')
             print('Please enter another URL...')
 
 # Main       
