@@ -16,6 +16,7 @@ import time
 admins = {'Paul':'pass!'}
 now = time.strftime("%c")
 
+# Pully
 def Pully():
     Welcome = ('Welcome to Pully')
     print(Welcome)
@@ -27,14 +28,14 @@ def Pully():
                  #'class':'headline-list__link'}
 
     if linktoenter in url:
-        print('Here are your top stories for ' + (time.strftime("%A "  +  "%B "  +  "%d")))
+        print('Here are your top stories for ' + (time.strftime("%A "  +  "%B "  +  "%d"))+ "\n ")
         links = {}
         n = 0
         link_title=soup.findAll('a',{'class':'title'})
         n += 1
         links[n] = link_title
         for eachtitle in link_title:
-            print(eachtitle.string +" (pulled from) "+eachtitle['href'])
+            print(eachtitle.string + "\n" + " (pulled from) "+eachtitle['href']+ "\n " )
         
         else:
             print('Whoops! Nothing seems to be here ')
