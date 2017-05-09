@@ -35,7 +35,7 @@ def Pully():
             keyword = searchtoenter
             links = {}
             n = 0
-            link_title=soup.findAll('a',{'class':'title'})#'li',{'class':'author-byline ks-author-byline'})
+            link_title=soup.findAll('a',{'class':'title'})
             n += 1
             links[n] = link_title
        
