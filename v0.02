@@ -1,0 +1,86 @@
+'''
+Pully
+
+1.) v0.1 Setup search functionality
+2.) v0.2 Have search return all links from front page unless other criteria is specified (author, date)
+3.) v0.3 When specific link is returned, pull all text from link between <p></p>
+4.) v0.4 Store data in dataframe, send to SQL DB
+5.) v1.0 Add url/link tracking in order to pull user behavior data
+'''
+
+# v0.01
+from bs4 import BeautifulSoup
+import urllib
+import time
+
+admins = {'Paul':'pass!'}
+now = time.strftime("%c")
+
+# Pully
+def Pully():
+    Welcome = ('Welcome to Pully')
+    print(Welcome)
+    linktoenter = input('Where do you want to pull from today?: ')
+    #search functionality: one word at a time
+    searchtoenter = input('Enter a keyword to narrow down your news: ')
+    url = linktoenter
+    keyword = searchtoenter
+    html = urllib.request.urlopen(url).read()
+    soup = BeautifulSoup(html, "lxml")
+
+    
+    if linktoenter in url:
+            print()
+            print(login  + ' here are your top stories for ' + (time.strftime("%A "  +  "%B "  +  "%d"))+ "\n ")
+            keyword = searchtoenter
+            links = {}
+            n = 0
+            link_title=soup.findAll('a',{'class':'title'})#'li',{'class':'author-byline ks-author-byline'})
+            n += 1
+            links[n] = link_title
+       
+            for eachtitle in link_title:
+                if keyword in eachtitle.string:
+                    print(eachtitle.string + "\n" + "(pulled from) "+eachtitle['href']+ "\n " )
+                elif keyword == '':
+                    for eachtitle in link_title:
+                        print(eachtitle.string + "\n" + "(pulled from) "+eachtitle['href']+ "\n " )
+                else:
+                    exit()
+    else:
+        print('Unable to connect to URL. Please check spelling and retry ')
+
+# Main       
+def main():
+    print('''
+    Pully v0.02 
+    
+    [1] Pully
+    [2] Exit
+    
+    
+    Release Notes: v0.02: Keyword search functionality added 
+    ''')
+    
+    action = input('Choose an option: ')
+    
+    if action == '1':
+        Pully()
+    elif action == '2':
+        exit()
+    else:
+        print('select a number') 
+
+# Login
+login = input('Username: ')
+passw = input('Password: ')
+
+if login in admins:
+    if admins[login] == passw:
+        print('Welcome', login)
+        while True: 
+            main()
+    else: 
+        print('Invalid Password')
+else:
+    print('Invalid Username')
