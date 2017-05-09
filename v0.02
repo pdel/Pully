@@ -8,7 +8,7 @@ Pully
 5.) v1.0 Add url/link tracking in order to pull user behavior data
 '''
 
-# v0.01
+# v0.02
 from bs4 import BeautifulSoup
 import urllib
 import time
