@@ -2,7 +2,7 @@
 Pully
 
 1.) v0.1 Setup search functionality
-2.) v0.2 Have search return all links from front page unless other criteria is specified (author, date)
+2.) v0.2 Have search return all links from front page unless other criteria is specified (keyword)
 3.) v0.3 When specific link is returned, pull all text from link between <p></p>
 4.) v0.4 Store data in dataframe, send to SQL DB
 5.) v1.0 Add url/link tracking in order to pull user behavior data
