@@ -1,0 +1,132 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Dec 16 15:18:19 2016
+
+@author: paul delano
+"""
+
+'''
+Pully Roadmap
+
+1.) v0.1 Setup search functionality
+2.) v0.2 Have search return all links from front page unless other criteria is specified (keyword)
+3.) v0.3 When specific link is returned, summarize text in x sentences
+4.) v0.4 Store data in dataframe, send to SQL DB
+5.) v1.0 Add url/link tracking in order to pull user behavior data
+'''
+
+# v0.03
+from bs4 import BeautifulSoup
+import urllib
+import time
+from sumy.parsers.html import HtmlParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer as Summarizer
+from sumy.nlp.stemmers import Stemmer
+from sumy.utils import get_stop_words
+
+admins = {'Paul':'pass!'}
+now = time.strftime("%c")
+
+# Pully
+def Pully():
+    Welcome = print('Lets start Pulling! ')
+    linktoenter = input('Where do you want to pull from today?: ')
+    searchtoenter = input('Enter a keyword to narrow down your news: ')
+    url = linktoenter
+    keyword = searchtoenter
+    html = urllib.request.urlopen(url).read()
+    soup = BeautifulSoup(html, "lxml")
+    LANGUAGE = input('Language ?: ')
+    SENTENCES_COUNT = input('How much information would you like to see ? (# of sentences): ')
+
+    
+    if linktoenter in url:
+            print()
+            print(login  + ' here are your top stories for ' + (time.strftime("%A "  +  "%B "  +  "%d"))+ "\n ")
+            print('__________________________________________________________________')
+            print()
+            keyword = searchtoenter
+            links = {}
+            n = 0
+            link_title=soup.findAll('a',{'class':'title'})
+            n += 1
+            links[n] = link_title
+                 
+            for eachtitle in link_title:
+                if keyword in eachtitle.string:
+                    print()
+                    print(eachtitle.string + "\n" + "(pulled from) "+ eachtitle['href'] + "\n " )
+                    
+                    eachlink = eachtitle['href']
+                    if __name__ == "__main__":
+                        url = eachlink
+                        parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
+
+                        stemmer = Stemmer(LANGUAGE)
+                        summarizer = Summarizer(stemmer)
+                        summarizer.stop_words = get_stop_words(LANGUAGE)
+
+                        for sentence in summarizer(parser.document, SENTENCES_COUNT):
+                            print(sentence)
+                            
+                elif keyword == '':
+                    for eachtitle in link_title:
+                        print(eachtitle.string + "\n" + "(pulled from) "+ eachtitle['href'] + "\n " )
+                        
+                        eachlink = eachtitle['href']
+                        if __name__ == "__main__":
+                            url = eachlink
+                            parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
+
+                            stemmer = Stemmer(LANGUAGE)
+                            summarizer = Summarizer(stemmer)
+                            summarizer.stop_words = get_stop_words(LANGUAGE)
+
+                            for sentence in summarizer(parser.document, SENTENCES_COUNT):
+                                print(sentence)
+
+                else:
+                    exit()
+    else:
+        print('Unable to connect to URL. Please check spelling and retry ')
+
+# Main       
+def main():
+    print('''
+    Pully v0.02 
+    
+    [1] Pully
+    [2] Exit
+    
+    
+    Release Notes: v0.0.3: Links are summarized. Language and # of sentences functionality added
+                   v0.0.2: Keyword search functionality added 
+                   v0.0.1: Headline & links returned
+    ''')
+    
+    action = input('Choose an option: ')
+    print()
+    
+    if action == '1':
+        Pully()
+    elif action == '2':
+        exit()
+    else:
+        print('select a number') 
+
+# Login
+WelcomeScreen = print('\n' + 'Welcome to Pully ' + '\n' + 'Please login ')
+login = input('Username: ')
+passw = input('Password: ')
+print()
+
+if login in admins:
+    if admins[login] == passw:
+        print('Welcome', login)
+        while True: 
+            main()
+    else: 
+        print('Invalid Password')
+else:
+    print('Invalid Username')
