@@ -100,9 +100,9 @@ def main():
     [2] Exit
     
     
-    Release Notes: v0.0.3: Links are summarized. Language and # of sentences functionality added
-                   v0.0.2: Keyword search functionality added 
-                   v0.0.1: Headline & links returned
+    Release Notes: v0.03: Links are summarized. Language and # of sentences functionality added
+                   v0.02: Keyword search functionality added 
+                   v0.01: Headline & links returned
     ''')
     
     action = input('Choose an option: ')
