@@ -37,8 +37,8 @@ def Pully():
     keyword = searchtoenter
     html = urllib.request.urlopen(url).read()
     soup = BeautifulSoup(html, "lxml")
-    LANGUAGE = input('Language ?: ')
-    SENTENCES_COUNT = input('How much information would you like to see ? (# of sentences): ')
+    language = input('Language ?: ')
+    sentences_count = input('How much information would you like to see ? (# of sentences): ')
 
     
     if linktoenter in url:
@@ -61,13 +61,13 @@ def Pully():
                     eachlink = eachtitle['href']
                     if __name__ == "__main__":
                         url = eachlink
-                        parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
+                        parser = HtmlParser.from_url(url, Tokenizer(language))
 
-                        stemmer = Stemmer(LANGUAGE)
+                        stemmer = Stemmer(language)
                         summarizer = Summarizer(stemmer)
-                        summarizer.stop_words = get_stop_words(LANGUAGE)
+                        summarizer.stop_words = get_stop_words(language)
 
-                        for sentence in summarizer(parser.document, SENTENCES_COUNT):
+                        for sentence in summarizer(parser.document, sentences_count):
                             print(sentence)
                             
                 elif keyword == '':
@@ -77,13 +77,13 @@ def Pully():
                         eachlink = eachtitle['href']
                         if __name__ == "__main__":
                             url = eachlink
-                            parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
+                            parser = HtmlParser.from_url(url, Tokenizer(language))
 
-                            stemmer = Stemmer(LANGUAGE)
+                            stemmer = Stemmer(language)
                             summarizer = Summarizer(stemmer)
-                            summarizer.stop_words = get_stop_words(LANGUAGE)
+                            summarizer.stop_words = get_stop_words(language)
 
-                            for sentence in summarizer(parser.document, SENTENCES_COUNT):
+                            for sentence in summarizer(parser.document, sentences_count):
                                 print(sentence)
 
                 else:
