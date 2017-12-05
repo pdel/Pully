@@ -8,11 +8,11 @@ Created on Fri Dec 16 15:18:19 2016
 '''
 Pully Roadmap
 
-1.) v0.01 Setup search functionality
-2.) v0.02 Have search return all links from front page unless other criteria is specified (keyword)
-3.) v0.03 When specific link is returned, summarize text in x sentences
-4.) v0.04 Store data in dataframe, send to SQL DB
-5.) v1.0 Add url/link tracking in order to pull user behavior data
+1.) v0.01 Setup search functionality.
+2.) v0.02 Have search return all links from front page unless other criteria is specified (keyword).
+3.) v0.03 When specific link is returned, summarize text in x sentences.
+4.) v0.04 Store data in dataframe, send to SQL DB.
+5.) v1.0 Add url/link tracking in order to pull user behavior data.
 '''
 
 # v0.03
