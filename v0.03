@@ -13,6 +13,7 @@ Pully Roadmap
 3.) v0.03 When specific link is returned, summarize text in x sentences.
 4.) v0.04 Store data in dataframe, send to SQL DB.
 5.) v1.0 Add url/link tracking in order to pull user behavior data.
+6.) v1.1 Create ML algorithm to predict user search requests and return pulls based on previous searches
 '''
 
 # v0.03
