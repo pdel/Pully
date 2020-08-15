@@ -1,5 +1,5 @@
 # Pully
-Pully: Only The News You Want
+Website Scraper
 
 Version (Python 3.6)
 
