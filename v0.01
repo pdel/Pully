@@ -1,16 +1,24 @@
-'''
-Pully
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Dec 16 15:18:19 2016
 
-1.) v0.1 Setup search functionality
-2.) v0.2 Have search return all links from front page unless other criteria is specified (author, date)
-3.) v0.3 When specific link is returned, pull all text from link between <p></p>
-4.) v0.4 Store Data in dataframe, send to SQL DB
-5.) v1.0 Add url/link tracking in order to pull user behavior data
+@author: paul delano
+"""
+
+'''
+Pully Roadmap
+
+1.) v0.1 Setup search functionality.
+2.) v0.2 Have search return all links from front page unless other criteria is specified (keyword).
+3.) v0.3 When specific link is returned, summarize text in x sentences.
+4.) v0.4 Store data in dataframe, send to SQL DB.
+5.) v1.0 Add url/link tracking in order to pull user behavior data.
+6.) v2.0 Create ML algorithm to predict user search requests and return pulls based on previous searches
 '''
 
-# v0.01
+# v0.1
 from bs4 import BeautifulSoup
-import urllib
+import urllib.request
 import time
 
 admins = {'Paul':'pass!'}
@@ -18,50 +26,58 @@ now = time.strftime("%c")
 
 # Pully
 def Pully():
-    Welcome = ('Welcome to Pully')
-    print(Welcome)
-    linktoenter = input('Where do you want to pull from today?: ')
+    Welcome = print('Lets start Pulling! ' + '\n')
+    linktoenter = input('Where do you want to pull from today? (full url needed): ')
     url = linktoenter
     html = urllib.request.urlopen(url).read()
     soup = BeautifulSoup(html, "lxml")
-    #headlines = {'class':'title',
-                 #'class':'headline-list__link'}
 
     if linktoenter in url:
-        print('Here are your top stories for ' + (time.strftime("%A "  +  "%B "  +  "%d"))+ "\n ")
-        links = {}
-        n = 0
-        link_title=soup.findAll('a',{'class':'title'})
-        n += 1
-        links[n] = link_title
-        for eachtitle in link_title:
-            print(eachtitle.string + "\n" + " (pulled from) "+eachtitle['href']+ "\n " )
-        
-        else:
-            print('Whoops! Nothing seems to be here ')
-            print('Please enter another URL...')
+            print()
+            print(login  + ' here are your top stories for ' + (time.strftime("%A "  +  "%B "  +  "%d"))+ "\n ")
+            links = {}
+            n = 0
+            link_title=soup.findAll('a',{'class':'tout-title-link'})
+            n += 1
+            links[n] = link_title
+       
+            for eachtitle in link_title:
+                print(eachtitle.string + "\n" + "(pulled from) "+url+eachtitle['href']+ "\n " )
+            else:
+                exit()
+    else:
+        print('Unable to connect to URL. Please check spelling and retry ')
 
 # Main       
 def main():
     print('''
-    Pully v0.01
+    Pully v0.03 
     
     [1] Pully
     [2] Exit
+    
+    
+    Release Notes: 
+                   v0.1: Headline & links returned
     ''')
     
     action = input('Choose an option: ')
+    print()
     
     if action == '1':
         Pully()
     elif action == '2':
         exit()
     else:
-        print('select a number') 
+        print('select a number')
+        action = input('Choose an option:> ')
+        print()
 
-# Login
+
+Home = print('\n' + 'Welcome to Pully ' + '\n' + 'Please login ' + '\n')
 login = input('Username: ')
 passw = input('Password: ')
+print('Authenticating...' + '\n')
 
 if login in admins:
     if admins[login] == passw:
@@ -70,5 +86,7 @@ if login in admins:
             main()
     else: 
         print('Invalid Password')
+
+           
 else:
-    print('Invalid Username')
+    print('Invalid Username-- You have been logged out. Please log back in')
